@@ -54,6 +54,7 @@
     right: -0.2em;
     padding-right: 0.2em;
     position: relative;
+    color: #947b2f;
 }
 
 .inputArea input:focus {
@@ -136,6 +137,14 @@ function setup() {
 
 	outputProblems(type, problems);
 
+	focusOnFirstProblem();
+
+
+}
+
+function focusOnFirstProblem() {
+	var firstProb = document.getElementById("answer_0");
+	firstProb.focus();
 }
 
 function focusOnNextInput(id) {
