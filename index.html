@@ -159,6 +159,19 @@ function setup() {
 
 }
 
+// https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
+function validate(evt) {
+  var theEvent = evt || window.event;
+  var key = theEvent.keyCode || theEvent.which;
+  key = String.fromCharCode( key );
+  var regex = /[0-9]|\./;
+  if( !regex.test(key) ) {
+    theEvent.returnValue = false;
+    if(theEvent.preventDefault) theEvent.preventDefault();
+  }
+}
+
+
 function focusOnFirstProblem() {
 	var firstProb = document.getElementById("answer_0");
 	firstProb.focus();
@@ -232,7 +245,7 @@ function htmlForType(type, prob, idx) {
 		    				<div class='inputArea'>\
 		    					<input type='text' class='answers' id='answer_"
 		    					+ idx +
-		    					"'></input>\
+		    					"' onKeyPress='validate(event);'></input>\
 			    			</div>\
 			    			<div class='clearer'></div>\
 		    			</div>\
