@@ -112,6 +112,7 @@ document.addEventListener('keydown', function(e) {
 	var dnArrowKey = 40;
 	var delKey = 8;
 	var enterKey = 13;
+	var spaceKey = 32;
     console.log('keydown:' + e.keyCode);
 
     var el = e.target;
@@ -128,6 +129,13 @@ document.addEventListener('keydown', function(e) {
 		focusOnNextInput(id);
         return false;
     }
+
+    if (e.keyCode == spaceKey) {
+    	e.preventDefault();
+		focusOnNextInput(id);
+        return false;
+    }
+
 
     // if key is an arrow key, don't type the user
     // input. 
