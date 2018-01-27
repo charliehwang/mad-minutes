@@ -4,6 +4,7 @@
 <head>
 	<title>MAD MINUTES</title>
 	<link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 </head>
 
 
@@ -17,9 +18,51 @@
 	font-size: 200%;
 	font-family: 'Faster One', cursive;
 	/*border: 1px solid pink;*/
+	color: #676767;
 	color: #ec501f;
-	color: #bdbdbd;
 	padding-left: 0.5em;
+}
+
+.logoLighter {
+	color: #bdbdbd;
+	color: #ee7920;
+}
+
+.typeWrapper {
+	font-family: 'Oswald', sans-serif;
+	font-size: 130%;
+	/*border: 1px solid red;*/
+	margin-top: 1em;
+}
+
+.typeHeader {
+	font-size: 130%;
+	/*border: 1px solid red;*/
+	padding: 0.5em 1em 0.5em 0em;
+	color: #693610;
+}
+
+.setWrapper {
+
+}
+
+.set {
+	float: left;
+	padding: 1em;
+	border: 1px solid #eaeaea;
+	width: 2em;
+	text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+    border-color: #dedede;
+	transition: all 0.1s ease-in-out;
+
+}
+
+.set:hover {
+    box-shadow: 0 1px 4px rgba(238, 120, 32, 0.3), 0 0 24px rgba(238, 105, 31, 0.4) inset;
+    border-color: #ee7820;
+    text-shadow: 0 0 8px #ed5421;
+    color: #b32800;
 }
 
 .mult {
@@ -98,7 +141,106 @@
 
 
 <script>
-
+data = {
+	"Multiplication" : {
+			"A" : [ 
+					[1,5], [2,7], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
+					[3,2], [0,6], [5,3], [2,4], [6,4], [3,5], [8,4], [3,7], [7,4], [5,4],
+					[6,2], [8,9], [5,2], [6,7], [2,3], [4,8], [4,5], [3,5], [5,8], [4,4],
+					[8,7], [7,2], [9,6], [6,5], [8,3], [7,6], [5,9], [2,6], [6,2], [3,9],
+				  ],
+			"B" : [ 
+					[1,5], [2,7], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
+					[3,2], [0,6], [5,3], [2,4], [6,4], [3,5], [8,4], [3,7], [7,4], [5,4],
+					[6,2], [8,9], [5,2], [6,7], [2,3], [4,8], [4,5], [3,5], [5,8], [4,4],
+					[8,7], [7,2], [9,6], [6,5], [8,3], [7,6], [5,9], [2,6], [6,2], [3,9],
+				  ],
+			"C" : [ 
+					[1,5], [2,7], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
+					[3,2], [0,6], [5,3], [2,4], [6,4], [3,5], [8,4], [3,7], [7,4], [5,4],
+					[6,2], [8,9], [5,2], [6,7], [2,3], [4,8], [4,5], [3,5], [5,8], [4,4],
+					[8,7], [7,2], [9,6], [6,5], [8,3], [7,6], [5,9], [2,6], [6,2], [3,9],
+				  ],
+			"D" : [ 
+					[1,5], [2,7], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
+					[3,2], [0,6], [5,3], [2,4], [6,4], [3,5], [8,4], [3,7], [7,4], [5,4],
+					[6,2], [8,9], [5,2], [6,7], [2,3], [4,8], [4,5], [3,5], [5,8], [4,4],
+					[8,7], [7,2], [9,6], [6,5], [8,3], [7,6], [5,9], [2,6], [6,2], [3,9],
+				  ],
+			"E" : [ 
+				  ],
+			"F" : [ 
+				  ],
+			"G" : [ 
+				  ],
+			"H" : [ 
+				  ],
+			"I" : [ 
+				  ],
+			"J" : [ 
+				  ],
+			"K" : [ 
+				  ],
+			"L" : [ 
+				  ],
+			"M" : [ 
+				  ],
+			"N" : [ 
+				  ],
+			"O" : [ 
+				  ],
+			"P" : [ 
+				  ],
+			"Q" : [ 
+				  ],
+			"R" : [ 
+				  ],
+			"S" : [ 
+				  ],
+			"T" : [ 
+				  ],
+			"U" : [ 
+				  ],
+			"V" : [ 
+				  ],
+			"W" : [ 
+				  ],
+			"X" : [ 
+				  ],
+			"50 A" : [ 
+				     ],
+			"50 B" : [ 
+				     ],
+	},
+	"Division" : {
+			"A" : [ 
+				  ],
+			"B" : [ 
+				  ],
+			"C" : [ 
+				  ],
+			"D" : [ 
+				  ],
+			"E" : [ 
+				  ],
+			"F" : [ 
+				  ],
+			"G" : [ 
+				  ],
+			"H" : [ 
+				  ],
+			"I" : [ 
+				  ],
+			"J" : [ 
+				  ],
+			"K" : [ 
+					[7,63], [5,25], [1,3], [4,16], [9,63], [2,12], [6,54], [1,4], [9,27], [9,45],
+					[9,36], [7,14], [4,8], [9,63], [3,27], [5,10], [5,45], [5,25], [2,10], [9,63],
+					[9,45], [3,9], [9,54], [7,7], [2,8], [5,25], [7,63], [6,12], [9,36], [1,2],
+					[4,16], [2,10], [5,25], [7,63], [1,3], [3,6], [2,18], [3,9], [9,54], [7,14],
+				  ],
+	},
+};
 
 document.addEventListener('keydown', function(e) {
 	var leftArrowKey = 37;
@@ -154,16 +296,46 @@ function setup() {
 	// var el = document.getElementById('foo');
 	// el.innerHTML = 'Hello World!';
 
+
+	outputSets();
+
+
 	var type = "Multiplication";
 	var set = "W";
 
-	var problems = getProblemsForTypeAndSet(type, set);
-
-	outputProblems(type, problems);
-
-	focusOnFirstProblem();
+	// var problems = getProblemsForTypeAndSet(type, set);
+	// outputProblems(type, problems);
+	// focusOnFirstProblem();
 
 
+}
+
+function outputSets() {
+	var type = Object.keys(data);
+
+	var el = document.getElementById('mathContent');
+		el.innerHTML = "";
+
+	var html = "";
+	type.forEach( function(type, i) {
+		var sets = Object.keys(data[type]);
+
+		html += "<div class='typeWrapper'>\
+					<div class='typeHeader'>"
+						+ type +
+					"</div>";
+
+					html += "<div class='setWrapper'>";
+						sets.forEach( function (set, i) {
+							html += "<div class='set' onClick='setupProblemsForTypeAndSet(\"" + type + "\",\"" + set + "\");'>" + set + "</div>";
+						});
+					html += "</div>";
+
+					html += "<div class='clearer'></div>";
+		html += "</div>";
+	});
+
+	el.innerHTML = html;
 }
 
 // https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
@@ -212,15 +384,21 @@ function getIdxFromInputID(id) {
 	return idx;
 }
 
+function setupProblemsForTypeAndSet(type, set) {
+	var problems = getProblemsForTypeAndSet(type, set);
+	outputProblems(type, problems);
+}
 
 function outputProblems(type, problems) {
 	var el = document.getElementById('mathContent');
+		el.innerHTML = "";
 
 	problems.forEach( function (prob, i) {
 		var html = htmlForType(type, prob, i);
 
 		el.innerHTML += html;
 	});
+	focusOnFirstProblem();
 }
 
 
@@ -277,32 +455,15 @@ function getProblemsForTypeAndSet(type, set) {
 }
 
 
-data = {
-	"Multiplication" : {
-			"W" : [ 
-					// [1,15], [2,227], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
-					[1,5], [2,7], [0,7], [4,6], [9,8], [9,7], [7,7], [5,6], [3,8], [4,2],
-					[3,2], [0,6], [5,3], [2,4], [6,4], [3,5], [8,4], [3,7], [7,4], [5,4],
-					[6,2], [8,9], [5,2], [6,7], [2,3], [4,8], [4,5], [3,5], [5,8], [4,4],
-					[8,7], [7,2], [9,6], [6,5], [8,3], [7,6], [5,9], [2,6], [6,2], [3,9],
-				  ],
-	},
-	"Division" : {
-			"K" : [ 
-					[7,63], [5,25], [1,3], [4,16], [9,63], [2,12], [6,54], [1,4], [9,27], [9,45],
-					[9,36], [7,14], [4,8], [9,63], [3,27], [5,10], [5,45], [5,25], [2,10], [9,63],
-					[9,45], [3,9], [9,54], [7,7], [2,8], [5,25], [7,63], [6,12], [9,36], [1,2],
-					[4,16], [2,10], [5,25], [7,63], [1,3], [3,6], [2,18], [3,9], [9,54], [7,14],
-				  ],
-	},
-}
+
 </script>
 
 
 <body onLoad="setup();">
 	<div id="wrapper">
 		<div id="banner">
-			<div id="logo">MM</div>
+			<!-- <div id="logo">MM</div> -->
+			<div id="logo">MAD<span class="logoLighter">MINUTES<span></div>
 		</div>
 		<div id="mathContent"></div>
 	</div>
