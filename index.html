@@ -15,12 +15,83 @@
 }
 
 #logo {
+	float: left;
 	font-size: 200%;
 	font-family: 'Faster One', cursive;
 	/*border: 1px solid pink;*/
 	color: #676767;
 	color: #ec501f;
 	padding-left: 0.5em;
+}
+
+#home { 
+	float: right; 
+	margin-right: 0.5em;
+	position: relative;
+    top: 0.03em;
+}
+
+/* close button from enjoycss.com */
+.close-button {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 0.25em;
+  height: 0.25em;
+  position: relative;
+  border: none;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  font: normal 8em/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #8c8c8c;
+}
+
+.close-button::before {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 0.15em;
+  height: 0.03em;
+  position: absolute;
+  content: "";
+  top: 0.11em;
+  left: 0.055em;
+  border: none;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #ffffff;
+  text-shadow: none;
+  -webkit-transform: rotateZ(45deg)   ;
+  transform: rotateZ(45deg)   ;
+}
+
+.close-button::after {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 0.15em;
+  height: 0.03em;
+  position: absolute;
+  content: "";
+  top: 0.11em;
+  left: 0.055em;
+  border: none;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #ffffff;
+  text-shadow: none;
+  -webkit-transform: rotateZ(-45deg)   ;
+  transform: rotateZ(-45deg)   ;
 }
 
 .logoLighter {
@@ -33,6 +104,133 @@
 	font-size: 130%;
 	/*border: 1px solid red;*/
 	margin-top: 1em;
+
+    position: relative;
+    left: -100em;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 0.5s forwards;
+    animation-delay: 0s;
+
+}
+
+@-webkit-keyframes slide {
+    100% { 
+    	top: 0; 
+    	right: 0; 
+    	left: 0; 
+    	bottom: 0; 
+
+		color: #693610;
+    	background: none;
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% { 
+    	opacity: 0;
+    }
+    50% { 
+    	opacity: 1;
+    }
+    100% { 
+    	opacity: 1;
+    }
+}
+
+@keyframes slide {
+    100% { 
+    	top: 0; 
+    	right: 0; 
+    	left: 0; 
+    	bottom: 0; 
+
+		color: #693610;
+    	background: none;
+    }
+}
+
+.blur {
+	filter: blur(7px);
+}
+
+/*base code*/
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+/*the animation definition*/
+@-webkit-keyframes lightSpeedOut {
+  0% {
+    opacity: 1
+  }
+  100% {
+    -webkit-transform: translate3d(7em, 0, 0) skewX(10deg);
+    transform: translate3d(7em, 0, 0) skewX(10deg);
+    opacity: 0
+  }
+}
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1
+  }
+  100% {
+    -webkit-transform: translate3d(7em, 0, 0) skewX(10deg);
+    -ms-transform: translate3d(7em, 0, 0) skewX(10deg);
+    transform: translate3d(7em, 0, 0) skewX(10deg);
+    opacity: 0
+  }
+}
+.lightSpeedOut {
+  -webkit-animation-name: lightSpeedOut;
+  animation-name: lightSpeedOut;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in
+}
+
+#message {
+	font-family: 'Oswald', sans-serif;
+	float: left;
+	position: relative;	
+	/*top: 0.2em;*/
+	/*border: 1px solid black;*/
+
+}
+
+.redLight { background: red; }
+.yellowLight { background: #FFCD00; }
+.greenLight { background: #00FF00; }
+
+#readySetGoWrapper {
+	font-size: 153%;
+	text-align: center;
+	width: 4em;
+	margin-left: 1em;
+    border-radius: 5px;
+	color:white;
+
+	/*border: 1px solid red;*/
+}
+
+#readySetGoMessage {
+	/*border: 1px solid blue;*/
+
+/*    -webkit-animation: pulse 1s forwards;
+    -webkit-animation-delay: 0s;
+    animation: pulse 1s forwards;
+    animation-delay: 0s;
+    opacity: 0;
+*/
 }
 
 .typeHeader {
@@ -54,15 +252,24 @@
 	text-align: center;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
     border-color: #dedede;
-	transition: all 0.1s ease-in-out;
+	transition: all 0.5s ease-in-out;
+	font-weight: bold;
 
+	position: relative;
+	/*left: -100em;*/
+    -webkit-animation: slide 1.0s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 1.0s forwards;
+    animation-delay: 0s;
 }
 
 .set:hover {
     box-shadow: 0 1px 4px rgba(238, 120, 32, 0.3), 0 0 24px rgba(238, 105, 31, 0.4) inset;
-    border-color: #ee7820;
-    text-shadow: 0 0 8px #ed5421;
-    color: #b32800;
+    border-color: #ffb985;
+	text-shadow: 0 0 2px #ff4000;
+    color: #982200;	
+    transition: all 0.5s ease-in-out;
+
 }
 
 .mult {
@@ -74,7 +281,15 @@
 	padding-top: 1em;
 	padding-right: 1em;
 	padding-bottom: 2em;
+
+    position: relative;
+    left: -100em;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 0.5s forwards;
+    animation-delay: 0s;
 }
+
 .symbol {
     padding-top: 1.9em;
     padding-left: 0.2em;
@@ -242,6 +457,9 @@ data = {
 	},
 };
 
+var timeoutA = null;
+var timeoutB = null;
+
 document.addEventListener('keydown', function(e) {
 	var leftArrowKey = 37;
 	var rightArrowKey = 39;
@@ -286,7 +504,16 @@ document.addEventListener('keydown', function(e) {
         return false;
     }
 
+});
 
+
+document.addEventListener('click', function(event) { 
+    // if(!$(event.target).closest('#menucontainer').length) {
+    //     if($('#menucontainer').is(":visible")) {
+    //         $('#menucontainer').hide();
+    //     }
+    // }        
+    console.log("clicky clicky");
 });
 
 
@@ -297,24 +524,46 @@ function setup() {
 	// el.innerHTML = 'Hello World!';
 
 
-	outputSets();
+	// outputSets();
 
 
 	var type = "Multiplication";
 	var set = "W";
 
-	// var problems = getProblemsForTypeAndSet(type, set);
-	// outputProblems(type, problems);
-	// focusOnFirstProblem();
+	setupProblemsForTypeAndSet("Multiplication","A");
+}
 
+function displayReadySetGo() {
+	outputReadySetGoMessage("Ready", "redLight");
+	timeoutA = setTimeout( function () { outputReadySetGoMessage("Set", "yellowLight") }, 1500);
+	timeoutB = setTimeout( function () { 
+			outputReadySetGoMessage("Go", "greenLight");
+			var el = document.getElementById('mathContent');
+			el.classList.remove("blur");
+		}, 3000);
+}
 
+function outputReadySetGoMessage(message, cssClass) {
+	var el = document.getElementById('message');
+	el.innerHTML = "";
+
+	var html = "<div id='readySetGoWrapper' class='lightSpeedOut animated " + cssClass + "'><div id='readySetGoMessage'>" + message + "</div></div>";
+
+	el.innerHTML = html;
 }
 
 function outputSets() {
 	var type = Object.keys(data);
 
+	if(timeoutA)
+		clearTimeout(timeoutA);
+
+	if(timeoutB)
+		clearTimeout(timeoutB);
+
 	var el = document.getElementById('mathContent');
 		el.innerHTML = "";
+		el.classList.remove("blur");
 
 	var html = "";
 	type.forEach( function(type, i) {
@@ -325,9 +574,20 @@ function outputSets() {
 						+ type +
 					"</div>";
 
+
 					html += "<div class='setWrapper'>";
 						sets.forEach( function (set, i) {
-							html += "<div class='set' onClick='setupProblemsForTypeAndSet(\"" + type + "\",\"" + set + "\");'>" + set + "</div>";
+
+							var topVal = getRandMoveValue();
+							var rightVal = getRandMoveValue();
+							var bottomVal = getRandMoveValue();
+							var leftVal = getRandMoveValue();
+							// var colorValA = rainbow(5, Math.random(5));
+							// var colorValB = rainbow(5, Math.random(5));
+							var colorValA = getRandomColor();
+							var colorValB = getRandomColor();
+
+							html += "<div class='set' style='color:" + colorValA + "; background:" + colorValB + "; top:" + topVal + "em; right:" + rightVal + "em; bottom:" + bottomVal + "em; left:" + leftVal + "em;' onClick='setupProblemsForTypeAndSet(\"" + type + "\",\"" + set + "\");'>" + set + "</div>";
 						});
 					html += "</div>";
 
@@ -337,6 +597,56 @@ function outputSets() {
 
 	el.innerHTML = html;
 }
+
+// https://stackoverflow.com/questions/1484506/random-color-generator
+function rainbow(numOfSteps, step) {
+    // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+    // Adam Cole, 2011-Sept-14
+    // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+    var r, g, b;
+    var h = step / numOfSteps;
+    var i = ~~(h * 6);
+    var f = h * 6 - i;
+    var q = 1 - f;
+    switch(i % 6){
+        case 0: r = 1; g = f; b = 0; break;
+        case 1: r = q; g = 1; b = 0; break;
+        case 2: r = 0; g = 1; b = f; break;
+        case 3: r = 0; g = q; b = 1; break;
+        case 4: r = f; g = 0; b = 1; break;
+        case 5: r = 1; g = 0; b = q; break;
+    }
+    var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+    return (c);
+}
+
+//https://stackoverflow.com/questions/1484506/random-color-generator
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  // return color;
+  return '#'+Math.floor(Math.random()*16777215).toString(16);
+}
+
+function getRandMoveValue() {
+	var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+
+	var max = 10;
+
+	var randIntA = Math.floor(Math.random() * Math.floor(max)) * plusOrMinus;
+	var randIntB = Math.floor(Math.random() * Math.floor(max)) * plusOrMinus;
+	var randIntC = Math.floor(Math.random() * Math.floor(max)) * plusOrMinus;
+
+	var initialPlacement = 7;
+	var moveValue = initialPlacement * randIntA +  randIntB * randIntC;
+
+	return moveValue;
+}
+
 
 // https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
 function validate(evt) {
@@ -387,17 +697,25 @@ function getIdxFromInputID(id) {
 function setupProblemsForTypeAndSet(type, set) {
 	var problems = getProblemsForTypeAndSet(type, set);
 	outputProblems(type, problems);
+	displayReadySetGo();
+
 }
 
 function outputProblems(type, problems) {
 	var el = document.getElementById('mathContent');
 		el.innerHTML = "";
 
-	problems.forEach( function (prob, i) {
-		var html = htmlForType(type, prob, i);
+		el.classList.add("blur");
 
-		el.innerHTML += html;
+
+	var html = "";
+	problems.forEach( function (prob, i) {
+		html += htmlForType(type, prob, i);
+
 	});
+
+	html += "<div class='clearer'></div>";
+	el.innerHTML = html;
 	focusOnFirstProblem();
 }
 
@@ -406,10 +724,15 @@ function htmlForType(type, prob, idx) {
 	var firstNum = prob[0];
 	var secNum = prob[1];
 
+	var topVal = getRandMoveValue();
+	var rightVal = getRandMoveValue();
+	var bottomVal = getRandMoveValue();
+	var leftVal = getRandMoveValue();
+
 	var html = "";
 	switch(type) {
 	    case 'Multiplication':
-	    	html = "<div class='mult'>\
+	    	html = "<div class='mult' style='top:" + topVal + "em; right:" + rightVal + "em; bottom:" + bottomVal + "em; left:" + leftVal +  "em;' >\
 	    				<div class='top'>\
 		    				<div class='rightSide'>\
 			    				<div class='product productFirstNum'>"
@@ -463,7 +786,10 @@ function getProblemsForTypeAndSet(type, set) {
 	<div id="wrapper">
 		<div id="banner">
 			<!-- <div id="logo">MM</div> -->
-			<div id="logo">MAD<span class="logoLighter">MINUTES<span></div>
+			<div id="logo" onClick="outputSets();">MAD<span class="logoLighter">MINUTES<span></div>
+			<div id="message"></div>
+			<div id="home" class="close-button" onClick="outputSets();"></div>
+			<div class="clearer"></div>
 		</div>
 		<div id="mathContent"></div>
 	</div>
