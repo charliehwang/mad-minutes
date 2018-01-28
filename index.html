@@ -44,7 +44,7 @@
 
 .logoLighter {
 	color: #bdbdbd;
-	color: #ee7920;
+	color: #f5720f;
 }
 
 .logoDark {
@@ -55,31 +55,87 @@
 	color: #bdbdbd;
 }
 
-
 #home { 
 	display: none;
+
 	float: right; 
 	margin-right: 0.5em;
 	position: relative;
+	/*height: 0.25em;*/
+
+	border-radius: 1em;
+	height: 2em;
+	background: #ececec;
+
+	font-weight: bold;
+	font-size: 110%;
 }
+
+
+#setTitleWrapper {
+	float: right;
+	position: relative;	
+
+	border-radius: 1em;
+	height: 2em;
+	background: #ececec;
+	z-index: -1;
+
+	font-weight: bold;
+	font-size: 110%;
+
+	right: -2em;
+}
+
+/*For vertical-alignment : https://codepen.io/edge0703/pen/iHJuA; */
+#home:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+#setTitle {
+
+	display: inline-block;
+	vertical-align: middle;
+
+	padding-left: 1em;
+
+    height: 2.6em;
+
+	padding-right: 0.5em;
+
+}
+
+.weakerFont {
+	font-size: 90%;
+	color: #737373;
+}
+
+#setLabel {
+	color: #404040;
+	padding-left: 0.5em;
+}
+
 
 /* close button from enjoycss.com */
 .close-button {
-  display: inline-block;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  width: 0.25em;
-  height: 0.25em;
-  position: relative;
-  border: none;
-  -webkit-border-radius: 1em;
-  border-radius: 1em;
-  font: normal 8em/normal Arial, Helvetica, sans-serif;
-  color: rgba(0,0,0,1);
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  background: #bfbfbf;
+	display: inline-block;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	width: 0.25em;
+	height: 0.25em;
+	position: relative;
+	border: none;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	font: normal 8em/normal Arial, Helvetica, sans-serif;
+	color: rgba(0,0,0,1);
+	-o-text-overflow: clip;
+	text-overflow: clip;
+	background: #bfbfbf;
 }
 
 .close-button::before {
@@ -537,9 +593,9 @@ function setup() {
 	// el.innerHTML = 'Hello World!';
 
 
-	outputSets();
+	// outputSets();
 
-	// setupProblemsForTypeAndSet("Multiplication","A");
+	setupProblemsForTypeAndSet("Multiplication","A");
 }
 
 function displayReadySetGo() {
@@ -559,6 +615,11 @@ function outputReadySetGoMessage(message, cssClass) {
 	var html = "<div id='readySetGoWrapper' class='lightSpeedOut animated " + cssClass + "'><div id='readySetGoMessage'>" + message + "</div></div>";
 
 	el.innerHTML = html;
+}
+
+function setSetLabel(label) {
+	var el = document.getElementById('setLabel');
+		el.innerHTML = label;
 }
 
 function outputSets() {
@@ -586,7 +647,6 @@ function outputSets() {
 					<div class='typeHeader'>"
 						+ type +
 					"</div>";
-
 
 					html += "<div class='setWrapper'>";
 						sets.forEach( function (set, i) {
@@ -711,7 +771,9 @@ function setupProblemsForTypeAndSet(type, set) {
 
 	var problems = getProblemsForTypeAndSet(type, set);
 	outputProblems(type, problems);
+	setSetLabel(set);
 	displayReadySetGo();
+
 
 }
 
@@ -787,7 +849,6 @@ function outputProblems(type, problems) {
 	focusOnFirstProblem();
 }
 
-
 function htmlForType(type, prob, idx) {
 	var firstNum = prob[0];
 	var secNum = prob[1];
@@ -859,7 +920,19 @@ function getProblemsForTypeAndSet(type, set) {
 			</div>
 
 			<div id="message"></div>
-			<div id="home" class="close-button" onClick="outputSets();"></div>
+
+
+			<div id="home" onClick="outputSets();">
+				<div id="setTitle"><span class="weakerFont">Close set </span><span id="setLabel">A</span></div>
+				<div class="close-button"></div>
+				<!-- <div class="clearer"></div> -->
+			</div>
+
+<!-- 			<div id="setTitleWrapper" onClick="">
+				<div id="setTitle">Set A</div>
+			</div>
+ -->
+
 			<div class="clearer"></div>
 		</div>
 		<div id="mathContent"></div>
