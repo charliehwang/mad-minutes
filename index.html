@@ -580,6 +580,7 @@ function outputReadySetGoMessage(message, cssClass) {
 function outputSets() {
 	changeToColorLogo();
 	hideCloseButton();
+	hideMessage();
 
 	var type = Object.keys(data);
 
@@ -770,9 +771,20 @@ function hideCloseButton() {
 	el.style.display = 'none';
 }
 
+function showMessage() {
+	var el = document.getElementById('message');
+	el.style.display = 'block';
+}
+
+function hideMessage() {
+	var el = document.getElementById('message');
+	el.style.display = 'none';
+}
+
 function outputProblems(type, problems) {
 	changeToBlackWhiteLogo();
 	showCloseButton();
+	showMessage();
 
 	var el = document.getElementById('mathContent');
 		el.innerHTML = "";
