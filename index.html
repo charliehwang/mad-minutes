@@ -15,10 +15,11 @@
 }
 
 #zachSVG {
-    width: 4%;
-    float: right;
+    width: 1.5em;
+    /*float: right;*/
     position: relative;
-    left: -27.2em;
+    left: -0.8em;
+    top: 0.1em;
     z-index: -1;
     animation: pulse 1s forwards;
     animation-delay: 0s;
@@ -72,7 +73,6 @@
 	float: right; 
 	margin-right: 0.5em;
 	position: relative;
-    top: -0.25em;
 }
 
 /* close button from enjoycss.com */
@@ -199,23 +199,23 @@
 /*the animation definition*/
 @-webkit-keyframes lightSpeedOut {
   0% {
-    opacity: 1
+    opacity: 1;
   }
   100% {
     -webkit-transform: translate3d(7em, 0, 0) skewX(10deg);
     transform: translate3d(7em, 0, 0) skewX(10deg);
-    opacity: 0
+    opacity: 0;
   }
 }
 @keyframes lightSpeedOut {
   0% {
-    opacity: 1
+    opacity: 1;
   }
   100% {
     -webkit-transform: translate3d(7em, 0, 0) skewX(10deg);
     -ms-transform: translate3d(7em, 0, 0) skewX(10deg);
     transform: translate3d(7em, 0, 0) skewX(10deg);
-    opacity: 0
+    opacity: 0;
   }
 }
 .lightSpeedOut {
@@ -229,9 +229,6 @@
 	font-family: 'Oswald', sans-serif;
 	float: left;
 	position: relative;	
-	top: -2.2em;
-	right: -21em;
-	/*top: 0.2em;*/
 	/*border: 1px solid black;*/
 
 }
@@ -244,7 +241,6 @@
 	font-size: 153%;
 	text-align: center;
 	width: 4em;
-	margin-left: 1em;
     border-radius: 5px;
 	color:white;
 
@@ -870,11 +866,8 @@ function getProblemsForTypeAndSet(type, set) {
 	<div id="wrapper">
 		<div id="banner">
 			<!-- <div id="logo">MM</div> -->
-			<div id="logo" onClick="outputSets();">
-				MAD
-				<span id="logoSecond" class="logoLighter">MINUTES</span>
+			<div id="logo" onClick="outputSets();">MAD<span id="logoSecond" class="logoLighter">MINUTES</span>
 				<img id="zachSVG" src="zach-dinosaur.svg"></img>
-				<div class="clearer"></div>
 			</div>
 
 			<div id="message"></div>
