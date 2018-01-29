@@ -592,9 +592,57 @@ function setup() {
 	// el.innerHTML = 'Hello World!';
 
 
-	outputSets();
+	// outputSets();
 
-	// setupProblemsForTypeAndSet("Multiplication","A");
+	setupProblemsForTypeAndSet("Multiplication","A");
+}
+
+
+// from https://codepen.io/ishanbakshi/pen/pgzNMv
+function startCountDown() {
+  var presentTime = document.getElementById('countDown').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+
+  if(m<0) {
+  	console.log('timer completed')
+  	calculateScore();
+  	return; 
+  }
+  
+  document.getElementById('countDown').innerHTML =
+    m + ":" + s;
+  setTimeout(startCountDown, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+
+
+function calculateScore() {
+	console.log("Calculating score.");	
+
+	// pass , try again
+	// # total 
+	// # correct
+	// # wrong
+	// accuracy
+	// spark charts?? 
+	// 
+	// fix the # wrong and you get... something... 
+	//  
+	// previous high scores tally per set
+
+
+	// save set score for last 5 per set.
+	// save set score for top 5 per set (most completed problems)
+	// when accomplished. 
+	// 
 }
 
 function displayReadySetGo() {
@@ -604,6 +652,8 @@ function displayReadySetGo() {
 			outputReadySetGoMessage("Go", "greenLight");
 			var el = document.getElementById('mathContent');
 			el.classList.remove("blur");
+
+			startCountDown();
 		}, 3000);
 }
 
@@ -919,6 +969,7 @@ function getProblemsForTypeAndSet(type, set) {
 			</div>
 
 			<div id="message"></div>
+			<div id="countDown">0:05</div>
 
 
 			<div id="home" onClick="outputSets();">
