@@ -9,6 +9,10 @@
 
 
 <style>
+body {
+	margin:0;
+	padding:0;
+}
 
 #wrapper {
 	padding: 1em;
@@ -418,6 +422,231 @@
 
 }
 
+#mathContent {}
+
+#scoreSheet {
+	/*display: none;*/
+	position: fixed;
+
+	background: #ec501f;
+	display: block;
+	width: 70%;
+	height: 10%;
+    /*top: -10%;*/
+
+
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+
+    z-index: 2;
+
+    border-radius: 0 0 5px 5px;
+
+
+/*    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+*/
+/*	-webkit-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition:         all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+*/
+/*    -webkit-animation: slideDown 0s 1.0s 2 ease forwards;
+    -moz-animation:    slideDown 0s 1.0s 2 ease forwards;
+*/
+}
+
+.scoreSheetSlide {
+}
+
+
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(3em); }
+    /*10%, 90% { -webkit-transform: translateY(10%); }*/
+}
+@-moz-keyframes slideDown {
+    0%, 100% { -moz-transform: translateY(8%); }
+    /*10%, 90% { -moz-transform: translateY(10%); }*/
+}
+
+
+
+#scoreSheet {
+/*	display: inline-block;
+*/}
+
+#scoreContent {
+    margin-left: 1em;
+	margin-right: 1em;
+
+	display: flex;
+	height: 100%;
+	align-items: center;
+    justify-content: space-between;
+
+}
+
+
+#score {
+	position: relative;
+	float:right;
+}
+
+a {
+	font-family: 'Oswald', sans-serif;
+    background: #f5720f;
+/*    background: -moz-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: -o-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #de0009), color-stop(100%, #950006));
+    background: -webkit-linear-gradient(top, #de0009 0%, #950006 100%);
+    background: linear-gradient(top, #de0009 0%, #950006 100%);
+*/    border: solid #dc4619;
+    border-width: 1px 1px 1px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    display: inline-block;
+	height: 2.5em;
+    line-height: 2.4em;
+    margin-left: 1.3em;
+    margin-right: 1em;
+    padding: 0 1em 0 1em;
+    position: relative;
+    text-decoration: none;
+}
+
+a:before {
+    background: #f5720f;
+    /*background: -moz-linear-gradient(-45deg, #de0009 0%, #950006 100%);*/
+    /*background: -o-linear-gradient(-45deg, #de0009 0%, #950006 100%);*/
+    /*background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #de0009), color-stop(100%, #950006));*/
+    /*background: -webkit-linear-gradient(-45deg, #de0009 0%, #950006 100%);*/
+    /*background: linear-gradient(-45deg, #de0009 0%, #950006 100%);*/
+    border: solid #dc4619;
+    border-width: 0 0 1px 1px;
+	border-radius: 0.2em 0 0.2em 0.2em;
+    content: '';
+    display: block;
+	height: 1.8em;
+    left: -0.9em;
+    position: absolute;
+    top: 0.34em;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 1.9em;
+}
+
+a:hover, a:focus {
+    border-color: #c74018;
+    background: #da4a1d;
+/*    background: -moz-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(top, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(top, #b50007 0%, #7e0004 100%);
+*/}
+
+a:hover:before, a:focus:before {
+    border-color: #c74018;
+    background: #da4a1d;
+/*    background: -moz-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: -o-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #b50007), color-stop(100%, #7e0004));
+    background: -webkit-linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+    background: linear-gradient(-45deg, #b50007 0%, #7e0004 100%);
+*/}
+
+a span {
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+}
+
+
+#scoreMessage {
+	color: #fff;
+	font-weight: bolder;
+	font-size: 362%;
+}
+
+#numCorrect {
+	float: left;	
+	/*border: 1px solid red;*/
+	font-size: 362%;
+	color: white;
+}
+
+#passCheck {
+	float: left;	
+	margin-left: 0.5em;
+	/*border: 1px solid blue;*/
+}
+
+
+
+/*From: https://codepen.io/haniotis/pen/KwvYLO*/
+/*$color--green: #7ac142;*/
+/*$curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);*/
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  /*stroke: $color--green;*/
+  stroke: #458800;
+  fill: none;
+  animation: stroke .6s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+}
+
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 6;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px #458800;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) .8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #458800;
+  }
+}
+
 .clearer { clear: both; }
 </style>
 
@@ -626,6 +855,8 @@ function checkSecond(sec) {
 
 function calculateScore() {
 	console.log("Calculating score.");	
+	var el = document.getElementById('scoreSheet');
+		el.classList.add("scoreSheetSlide");
 
 	// pass , try again
 	// # total 
@@ -634,7 +865,8 @@ function calculateScore() {
 	// accuracy
 	// spark charts?? 
 	// 
-	// fix the # wrong and you get... something... 
+	// fix the # wrong and you get... something... +1 second next time for every corrected up to 5
+	// fix it all and you get statistics. 
 	//  
 	// previous high scores tally per set
 
@@ -643,18 +875,22 @@ function calculateScore() {
 	// save set score for top 5 per set (most completed problems)
 	// when accomplished. 
 	// 
+
+
 }
 
 function displayReadySetGo() {
-	outputReadySetGoMessage("Ready", "redLight");
-	timeoutA = setTimeout( function () { outputReadySetGoMessage("Set", "yellowLight") }, 1500);
-	timeoutB = setTimeout( function () { 
+	// outputReadySetGoMessage("Ready", "redLight");
+	// timeoutA = setTimeout( function () { outputReadySetGoMessage("Set", "yellowLight") }, 1500);
+	// timeoutB = setTimeout( function () { 
 			outputReadySetGoMessage("Go", "greenLight");
 			var el = document.getElementById('mathContent');
 			el.classList.remove("blur");
 
 			startCountDown();
-		}, 3000);
+		// }, 3000);
+
+		calculateScore();
 }
 
 function outputReadySetGoMessage(message, cssClass) {
@@ -961,6 +1197,28 @@ function getProblemsForTypeAndSet(type, set) {
 
 
 <body onLoad="setup();">
+
+	<div id="scoreSheet">
+		<div id="scoreContent">
+		    <a href="#" onClick="outputSets();"><span>Back</span></a>
+
+		    <div id="scoreMessage">
+		    	Awesome!
+		    </div>
+
+			<div id="score">
+				<div id="numCorrect">+25</div>
+				<div id="passCheck">
+					<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+						<circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+						<path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+					</svg>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+
 	<div id="wrapper">
 		<div id="banner">
 			<!-- <div id="logo">MM</div> -->
@@ -973,7 +1231,7 @@ function getProblemsForTypeAndSet(type, set) {
 
 
 			<div id="home" onClick="outputSets();">
-				<div id="setTitle"><span class="weakerFont">Close set </span><span id="setLabel">A</span></div>
+				<div id="setTitle"><span class="weakerFont">Set </span><span id="setLabel">A</span></div>
 				<div class="close-button"></div>
 				<!-- <div class="clearer"></div> -->
 			</div>
