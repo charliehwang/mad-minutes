@@ -761,6 +761,7 @@ var countDownTimeout = null;
 
 var selectedType = null;
 var selectedSet = null;
+var selectedProblemData = null;  // randomized problems can go here. 
 
 document.addEventListener('keydown', function(e) {
 	var leftArrowKey = 37;
@@ -1027,6 +1028,28 @@ function getRandMoveValue() {
 }
 
 
+//https://stackoverflow.com/a/2450976
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+
 // https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
 function validate(evt) {
   var theEvent = evt || window.event;
@@ -1148,7 +1171,9 @@ function outputProblems(type, problems) {
 
 
 	var html = "";
-	problems.forEach( function (prob, i) {
+
+	var randomProblems = shuffle(problems);
+	randomProblems.forEach( function (prob, i) {
 		html += htmlForType(type, prob, i);
 
 	});
