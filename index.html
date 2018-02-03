@@ -401,7 +401,7 @@ body {
 	font-size: 82%;
 	text-align: right;
 	float: right;
-	width: 3em;
+	width: 2.5em;
 	height: 2em;
 	border: 2px solid #eaeaea;
     border-radius: 5px;
@@ -428,6 +428,27 @@ body {
 
 .productSecNum {
 
+}
+
+.denominator {
+	float: right;
+	margin-top: 0.2em;
+	padding-top: 2px;
+	padding-right: 0.3em;
+	border-right: 2px #a7a7a7 solid; 
+	border-radius: 0px 0px 10px 0px;
+}
+
+.numerator {
+	float: right;
+	margin-top: 0.2em;
+	border-top: 2px #a7a7a7 solid;
+	padding-left: 0.3em;
+	padding-right: 0.1em;
+}
+
+.division {
+	/*border: 1px solid blue;*/
 }
 
 #mathContent {}
@@ -725,10 +746,10 @@ data = {
 	},
 	"Division" : {
 			"A" : [ 
-					[10,100], [5,25], [1,3], [4,16], [9,63], [2,12], [6,54], [1,4], [9,27], [9,45],
-					[9,36], [7,14], [4,8], [9,63], [3,27], [5,10], [5,45], [5,25], [2,10], [9,63],
-					[9,45], [3,9], [9,54], [7,7], [2,8], [5,25], [7,63], [6,12], [9,36], [1,2],
-					[4,16], [2,10], [5,25], [7,63], [1,3], [3,6], [2,18], [3,9], [9,54], [7,14],
+					[1,100], [5,25], [1,3], [1,16], [1,63], [1,12], [1,54], [1,4], [1,27], [1,45],
+					[1,100], [5,25], [1,3], [1,16], [1,63], [1,12], [1,54], [1,4], [1,27], [1,45],
+					[1,100], [5,25], [1,3], [1,16], [1,63], [1,12], [1,54], [1,4], [1,27], [1,45],
+					[1,100], [5,25], [1,3], [1,16], [1,63], [1,12], [1,54], [1,4], [1,27], [1,45],
 				  ],
 			"B" : [ 
 				  ],
@@ -770,7 +791,7 @@ var tryAgainMessages = [
 						"I know you can do better.",
 ];
 
-var maxPass = 1;
+var maxPass = 2;
 var maxTime = "0:05";  // 1:30 = 1 minute and 30 seconds
 
 var timeoutA = null;
@@ -848,9 +869,9 @@ function setup() {
 	// el.innerHTML = 'Hello World!';
 
 
-	// outputSets();
+	outputSets();
 
-	setupProblemsForTypeAndSet("Multiplication","A");
+	// setupProblemsForTypeAndSet("Division","A");
 }
 
 
@@ -943,33 +964,17 @@ function calculateScore() {
 				}
 
 			});
+			break;
 
-
-
-			var scoreMessageArray = tryAgainMessages;
-
-			var numCorrectID = 	document.getElementById("numCorrect");
-			numCorrectID.innerHTML = "+" + numberCorrect;
-
-			if (numberCorrect >= maxPass) {
-				var passCheckID = 	document.getElementById("passCheck");
-				passCheckID.style.display = "block";
-
-				scoreMessageArray = passedMessages;
-			}
-
-			var randomInt = getRandomInt(scoreMessageArray.length);
-			var message = scoreMessageArray[randomInt];
-			var scoreMessageID = 	document.getElementById("scoreMessage");
-			scoreMessageID.innerHTML = message;
-
-			var scoreSheetID = 	document.getElementById("scoreSheet");
-				scoreSheetID.style.display = "block";
-
+		case "Division":
+			console.log("Division calculation:");
+			checkNumberCorrect(selectedType);
 			break;
 		default:
-
 	}
+
+
+	displayScoring();
 
 	// pass , try again
 	// # total 
@@ -990,6 +995,88 @@ function calculateScore() {
 	// 
 
 
+}
+
+
+function checkNumberCorrect(type) {
+
+	selectedProblemData.forEach( function(prob, i) {
+		// go through each problem and check the input answer with calculated one
+		// if it's wrong, then highlight the wrong answer in red. 
+
+		var firstNum = prob[0];
+		var secNum = prob[1];
+		var calculatedAnswer = null;
+
+		switch (type) {
+			case "Multiplication":
+				calculatedAnswer = firstNum * secNum;
+				break;
+			case "Division":
+				calculatedAnswer = secNum / firstNum;
+				break;
+			default:
+		}
+
+
+		console.log(firstNum + " " + secNum + " = " + calculatedAnswer );
+
+		var answerInputID = document.getElementById("answer_" + i);
+		if (answerInputID.value != "") {
+
+			// if any input changes on wrong problems, then we can change the class to correct
+			answerInputID.addEventListener('input', function (evt) {
+				// console.log(this);
+
+				var studentAnswer = this.value
+
+				var idx = getIdxFromInputID(this.id);
+				var prob = selectedProblemData[idx];
+				var firstNum = prob[0];
+				var secNum = prob[1];
+				var calculatedAnswer = firstNum * secNum;
+
+				if (calculatedAnswer == studentAnswer)	{
+					answerInputID.classList.remove("checkAnswer");
+					answerInputID.classList.add("correctedAnswer");
+				}
+			});
+
+			var studentAnswer = parseFloat(answerInputID.value);
+			if (calculatedAnswer != studentAnswer)	{
+				answerInputID.classList.add("checkAnswer");
+			}
+			else {
+				numberCorrect++;
+			}
+		}
+	});
+
+
+
+}
+
+
+function displayScoring() {
+			var scoreMessageArray = tryAgainMessages;
+
+			var numCorrectID = 	document.getElementById("numCorrect");
+			numCorrectID.innerHTML = "+" + numberCorrect;
+
+			if (numberCorrect >= maxPass) {
+				var passCheckID = 	document.getElementById("passCheck");
+				passCheckID.style.display = "block";
+
+				scoreMessageArray = passedMessages;
+			}
+
+			var randomInt = getRandomInt(scoreMessageArray.length);
+			var message = scoreMessageArray[randomInt];
+			var scoreMessageID = 	document.getElementById("scoreMessage");
+			scoreMessageID.innerHTML = message;
+
+			var scoreSheetID = 	document.getElementById("scoreSheet");
+				scoreSheetID.style.display = "block";
 }
 
 function displayReadySetGo() {
@@ -1329,6 +1416,29 @@ function htmlForType(type, prob, idx) {
 	    			</div>";
 	        break;
 	    case 'Division':
+	    	html = "<div class='mult' style='top:" + topVal + "em; right:" + rightVal + "em; bottom:" + bottomVal + "em; left:" + leftVal +  "em;' >\
+	    				<div class='top'>\
+		    				<div class='inputArea'>\
+		    					<input type='text' class='answers' id='answer_"
+		    					+ idx +
+		    					"' onKeyPress='validate(event);'></input>\
+			    			</div>\
+			    			<div class='clearer'></div>\
+	    				<div class='bottom'>\
+		    				<div class='numerator'>\
+			    				<div class='division'>"
+			    				+ secNum + 
+			    				"</div>\
+		    				</div>\
+		    				<div class='denominator'>\
+			    				<div class='division'>"
+			    				+ firstNum + 
+			    				"</div>\
+			    			</div>\
+			    			<div class='clearer'></div>\
+		    			</div>\
+		    			</div>\
+	    			</div>";
 	        break;
 	    default:
 	}
