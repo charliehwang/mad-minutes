@@ -757,6 +757,11 @@ data = {
 var timeoutA = null;
 var timeoutB = null;
 
+var countDownTimeout = null;
+
+var selectedType = null;
+var selectedSet = null;
+
 document.addEventListener('keydown', function(e) {
 	var leftArrowKey = 37;
 	var rightArrowKey = 39;
@@ -843,7 +848,7 @@ function startCountDown() {
   
   document.getElementById('countDown').innerHTML =
     m + ":" + s;
-  setTimeout(startCountDown, 1000);
+  countDownTimeout = setTimeout(startCountDown, 1000);
 }
 
 function checkSecond(sec) {
@@ -854,9 +859,25 @@ function checkSecond(sec) {
 
 
 function calculateScore() {
+	if (timeoutA)
+		clearTimeout(timeoutA);
+	if (timeoutB)
+		clearTimeout(timeoutB);
+	if (countDownTimeout)
+		clearTimeout(countDownTimeout);
+
+
 	console.log("Calculating score.");	
 	var el = document.getElementById('scoreSheet');
 		el.classList.add("scoreSheetSlide");
+
+	switch(selectedType)	 {
+		case "Multiplication":
+			console.log("Multiplcation calculation:");
+			break;
+		default:
+
+	}
 
 	// pass , try again
 	// # total 
@@ -1053,6 +1074,9 @@ function getIdxFromInputID(id) {
 }
 
 function setupProblemsForTypeAndSet(type, set) {
+
+	selectedType = type;
+	selectedSet = set;
 
 	var problems = getProblemsForTypeAndSet(type, set);
 	outputProblems(type, problems);
