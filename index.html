@@ -389,6 +389,14 @@ body {
 	/*border: 1px solid orange;*/
 }
 
+.correctedAnswer {
+	background: #daffe3;
+}
+
+.checkAnswer {
+	background: #ffdada;
+}
+
 .inputArea input {
 	font-size: 82%;
 	text-align: right;
@@ -425,11 +433,10 @@ body {
 #mathContent {}
 
 #scoreSheet {
-	/*display: none;*/
+	display: none;
 	position: fixed;
 
 	background: #ec501f;
-	display: block;
 	width: 70%;
 	height: 10%;
     /*top: -10%;*/
@@ -445,28 +452,22 @@ body {
 
     border-radius: 0 0 5px 5px;
 
+	animation-duration: 0.3s;
+	animation-name: slideDown;
+	animation-direction: alternate;
 
-/*    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
-*/
-/*	-webkit-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	transition:         all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-*/
-/*    -webkit-animation: slideDown 0s 1.0s 2 ease forwards;
-    -moz-animation:    slideDown 0s 1.0s 2 ease forwards;
-*/
-}
-
-.scoreSheetSlide {
 }
 
 
 @-webkit-keyframes slideDown {
-    0%, 100% { -webkit-transform: translateY(3em); }
+  from {
+  	top: -5em;
+  }
+
+  to {
+  	top: 0em;
+  }
+
     /*10%, 90% { -webkit-transform: translateY(10%); }*/
 }
 @-moz-keyframes slideDown {
@@ -476,9 +477,6 @@ body {
 
 
 
-#scoreSheet {
-/*	display: inline-block;
-*/}
 
 #scoreContent {
     margin-left: 1em;
@@ -584,6 +582,7 @@ a span {
 }
 
 #passCheck {
+	display: none;
 	float: left;	
 	margin-left: 0.5em;
 	/*border: 1px solid blue;*/
@@ -754,14 +753,32 @@ data = {
 	},
 };
 
+var passedMessages = [ 
+						"Awesome, you did great!",
+						"You passed!",
+						"Quick thinking!",
+						"Great job!",
+];
+
+var tryAgainMessages = [ 
+						"Keep it up, you can do it!",
+						"Keep up the hard work!",
+						"I know you can do better.",
+];
+
+var maxPass = 1;
+var maxTime = "0:05";  // 1:30 = 1 minute and 30 seconds
+
 var timeoutA = null;
 var timeoutB = null;
 
 var countDownTimeout = null;
 
+var currentTime = maxTime;
 var selectedType = null;
 var selectedSet = null;
 var selectedProblemData = null;  // randomized problems can go here. 
+var numberCorrect = 0;
 
 document.addEventListener('keydown', function(e) {
 	var leftArrowKey = 37;
@@ -816,7 +833,7 @@ document.addEventListener('click', function(event) {
     //         $('#menucontainer').hide();
     //     }
     // }        
-    console.log("clicky clicky");
+    // console.log("clicky clicky");
 });
 
 
@@ -835,20 +852,23 @@ function setup() {
 
 // from https://codepen.io/ishanbakshi/pen/pgzNMv
 function startCountDown() {
-  var presentTime = document.getElementById('countDown').innerHTML;
-  var timeArray = presentTime.split(/[:]+/);
+  // var presentTime = document.getElementById('countDown').innerHTML;
+  var timeArray = currentTime.split(/[:]+/);
   var m = timeArray[0];
   var s = checkSecond((timeArray[1] - 1));
   if(s==59){m=m-1}
 
   if(m<0) {
   	console.log('timer completed')
+  	currentTime = maxTime;
   	calculateScore();
   	return; 
   }
   
-  document.getElementById('countDown').innerHTML =
-    m + ":" + s;
+  // document.getElementById('countDown').innerHTML = m + ":" + s;
+  currentTime = m + ":" + s;
+  console.log( m + ":" + s);
+
   countDownTimeout = setTimeout(startCountDown, 1000);
 }
 
@@ -872,9 +892,76 @@ function calculateScore() {
 	var el = document.getElementById('scoreSheet');
 		el.classList.add("scoreSheetSlide");
 
+	numberCorrect = 0; // reset this
+
 	switch(selectedType)	 {
 		case "Multiplication":
 			console.log("Multiplcation calculation:");
+
+			selectedProblemData.forEach( function(prob, i) {
+				// go through each problem and check the input answer with calculated one
+				// if it's wrong, then highlight the wrong answer in red. 
+
+				var firstNum = prob[0];
+				var secNum = prob[1];
+				var calculatedAnswer = firstNum * secNum;
+
+				// console.log(firstNum + " * " + secNum + " = " + calculatedAnswer );
+
+				var answerInputID = document.getElementById("answer_" + i);
+				if (answerInputID.value != "") {
+
+					// if any input changes on wrong problems, then we can change the class to correct
+					answerInputID.addEventListener('input', function (evt) {
+						console.log(this);
+
+						var studentAnswer = this.value
+
+						var idx = getIdxFromInputID(this.id);
+						var prob = selectedProblemData[idx];
+						var firstNum = prob[0];
+						var secNum = prob[1];
+						var calculatedAnswer = firstNum * secNum;
+
+						if (calculatedAnswer == studentAnswer)	{
+							answerInputID.classList.remove("checkAnswer");
+							answerInputID.classList.add("correctedAnswer");
+						}
+					});
+
+					var studentAnswer = parseFloat(answerInputID.value);
+					if (calculatedAnswer != studentAnswer)	{
+						answerInputID.classList.add("checkAnswer");
+					}
+					else {
+						numberCorrect++;
+					}
+				}
+
+			});
+
+
+
+			var scoreMessageArray = tryAgainMessages;
+
+			var numCorrectID = 	document.getElementById("numCorrect");
+			numCorrectID.innerHTML = "+" + numberCorrect;
+
+			if (numberCorrect >= maxPass) {
+				var passCheckID = 	document.getElementById("passCheck");
+				passCheckID.style.display = "block";
+
+				scoreMessageArray = passedMessages;
+			}
+
+			var randomInt = getRandomInt(scoreMessageArray.length);
+			var message = scoreMessageArray[randomInt];
+			var scoreMessageID = 	document.getElementById("scoreMessage");
+			scoreMessageID.innerHTML = message;
+
+			var scoreSheetID = 	document.getElementById("scoreSheet");
+				scoreSheetID.style.display = "block";
+
 			break;
 		default:
 
@@ -912,7 +999,7 @@ function displayReadySetGo() {
 			startCountDown();
 		// }, 3000);
 
-		calculateScore();
+		// calculateScore();
 }
 
 function outputReadySetGoMessage(message, cssClass) {
@@ -933,6 +1020,7 @@ function outputSets() {
 	changeToColorLogo();
 	hideCloseButton();
 	hideMessage();
+	hideScoreSheet();
 
 	var type = Object.keys(data);
 
@@ -1049,6 +1137,11 @@ function shuffle(array) {
 }
 
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+
 
 // https://stackoverflow.com/questions/469357/html-text-input-allows-only-numeric-input
 function validate(evt) {
@@ -1159,6 +1252,11 @@ function hideMessage() {
 	el.style.display = 'none';
 }
 
+function hideScoreSheet() {
+	var scoreSheetID = 	document.getElementById("scoreSheet");
+		scoreSheetID.style.display = "none";
+}
+
 function outputProblems(type, problems) {
 	changeToBlackWhiteLogo();
 	showCloseButton();
@@ -1172,14 +1270,18 @@ function outputProblems(type, problems) {
 
 	var html = "";
 
-	var randomProblems = shuffle(problems);
-	randomProblems.forEach( function (prob, i) {
+	selectedProblemData = shuffle(problems);
+
+	selectedProblemData.forEach( function (prob, i) {
 		html += htmlForType(type, prob, i);
 
 	});
 
 	html += "<div class='clearer'></div>";
 	el.innerHTML = html;
+
+
+
 	focusOnFirstProblem();
 }
 
@@ -1252,11 +1354,10 @@ function getProblemsForTypeAndSet(type, set) {
 		    <a href="#" onClick="outputSets();"><span>Back</span></a>
 
 		    <div id="scoreMessage">
-		    	Awesome!
 		    </div>
 
 			<div id="score">
-				<div id="numCorrect">+25</div>
+				<div id="numCorrect"></div>
 				<div id="passCheck">
 					<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
 						<circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
@@ -1276,7 +1377,7 @@ function getProblemsForTypeAndSet(type, set) {
 			</div>
 
 			<div id="message"></div>
-			<div id="countDown">0:05</div>
+			<!-- <div id="countDown">0:01</div> -->
 
 
 			<div id="home" onClick="outputSets();">
